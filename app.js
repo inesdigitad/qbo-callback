@@ -4,11 +4,11 @@ const app = express();
 app.get('/callback', (req, res) => {
   const code = req.query.code;
   const realmId = req.query.realmId;
-  console.log('CODE:', code);
-  console.log('REALM_ID:', realmId);
   res.send(`
     <h2>✅ Authentification QuickBooks réussie!</h2>
-    <p>Tu peux fermer cette fenêtre et retourner dans Claude Code.</p>
+    <p><strong>Code:</strong> ${code}</p>
+    <p><strong>Company ID (realmId):</strong> ${realmId}</p>
+    <p>Copie ces deux valeurs et retourne dans Claude Code.</p>
   `);
 });
 
