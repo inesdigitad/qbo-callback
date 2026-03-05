@@ -1,13 +1,16 @@
 const express = require('express');
+const https = require('https');
 const app = express();
 
-app.get('/callback', (req, res) => {
-  const code = req.query.code;
-  const realmId = req.query.realmId;
-  const state = req.query.state;
+app.get('/callback', async (req, res) => {
+  const { code, realmId, state } = req.query;
   
-  // Redirige vers le serveur local sur ton Mac
-  res.redirect(`http://localhost:8000/callback?code=${code}&realmId=${realmId}&state=${state}`);
+  res.send(`
+    <h2>✅ Authentification réussie!</h2>
+    <p><strong>CODE:</strong><br><textarea rows="3" cols="80">${code}</textarea></p>
+    <p><strong>REALM ID:</strong> ${realmId}</p>
+    <p>Copie le CODE et retourne dans ton terminal.</p>
+  `);
 });
 
 app.listen(process.env.PORT || 10000, () => console.log('Server running'));
